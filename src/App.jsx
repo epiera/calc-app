@@ -19,7 +19,7 @@ const App = () => {
 	const items = words(stack, /[^-^+^*^/]+/g)
 
 	// Lo que ejecuta la función
-	console.log("Renderización de App", items)
+	// console.log("Renderización de App", items)
 
 	const value = items.length > 0 ? items[items.length-1] : "0"
 
@@ -27,33 +27,22 @@ const App = () => {
 		<main className="react-calculator">
 			<Result value={value}></Result>
 			<Numbers
-				onClickNumber={number => {
-					console.log("number:", number)
-					setStack(`${stack}${number}`)
-				}}>
+				onClickNumber={number => setStack(`${stack}${number}`)}>
 			</Numbers>
 			<Functions
 				onContentClear={() => {
-					console.log("clear")
 					setStack("")
 				}}
 				onDelete={() => {
 					if (stack.length > 0){
-						console.log("delete")
 						const newStack = stack.substring(0,stack.length -1)
 						setStack(newStack)
 					}
 				}}>
 			</Functions>
 			<MathOperations
-				onClickOperation={operation => {
-					console.log("operation:", operation)
-					setStack(`${stack}${operation}`)
-				}}
-				onClickEqual={equal => {
-					console.log("equal:", equal)
-					setStack(eval(stack).toString())
-				}}>
+				onClickOperation={operation => setStack(`${stack}${operation}`)}
+				onClickEqual={equal => setStack(eval(stack).toString())}>
 			</MathOperations>
 		</main>
 	)
